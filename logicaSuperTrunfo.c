@@ -1,44 +1,41 @@
 #include <stdio.h>
 
-
-// Desafio Super Trunfo - Países
-// Tema 2 - Comparação das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de comparação de cartas de cidades. 
-// Siga os comentários para implementar cada parte do desafio.
-
 int main() {
-    // Definição das variáveis para armazenar as propriedades das cidades
-    // Você pode utilizar o código do primeiro desafio
+    
     char Estado1[50], Estado2[50];
     char Codigo1[50], Codigo2[50];
     char Cidade1[50], Cidade2[50];
     unsigned long int Populacao1, Populacao2;
-    float Area1, Area2;
+    float Area1, Area2, resultado1, resultado2, resultadoFinal;
     float PIB1, PIB2;
-    int Pontos1, Pontos2, escolhaJogador;
-    float Densidade1, Densidade2;
+    int Pontos1, Pontos2, escolhaJogador1, escolhaJogador2, escolhaJogador3, escolhaJogador4;
+    float Densidade1, Densidade2, somaJogador1 = 0, somaJogador2 = 0;
     float Percapita1, Percapita2;
     float SuperPoder1, SuperPoder2;
     
     
     
-    // Cadastro das Cartas:
-    // Implemente a lógica para solicitar ao usuário que insira os dados das cidades
-    // utilizando a função scanf para capturar as entradas.
-    // utilize o código do primeiro desafio
+    // Boas vindas ao jogo e explicando algumas regras
+    printf(" ## Seja Bem-vindo ao Super Trunfo ##\n");
+    printf("Cada jogador vai escolher uma cidade e responder as perguntas com os dados da mesma.\n");
+    printf("Será Possivel cadastras apenas 2 cartas.\n");
+    printf("BORA COMEÇAR A JOGAR !!\n");
+
+    // Cadastrando a primeira carta do jogo
+
     printf("Carta 1 \n");
 
     printf("Insira o nome do estado: ");
-    fgets(Estado1, sizeof(Estado1), stdin);  
-
+    fgets(Estado1, sizeof(Estado1), stdin);
+    //Código  da carta é uma letra e dois numeros. Exemplo: A01, B01.
     printf("Insira o código da carta: ");
     fgets(Codigo1, sizeof(Codigo1), stdin);
-    //Cada Estado vai ter  4 cidades, a letra vai identificar o estado e o numero a cidade, Ex: A01, A02, B01 e B02
+  
     printf("Insira o nome da cidade: ");
     fgets(Cidade1, sizeof(Cidade1), stdin);
 
     printf("Insira a população desta cidade: ");
-    scanf("%d", &Populacao1);
+    scanf("%lu", &Populacao1);
 
     printf("Insira a área da cidade em KM²: ");
     scanf("%f", &Area1);
@@ -57,6 +54,7 @@ int main() {
     getchar();
 
     //Cadastrando a segunda carta do jogo.
+
     printf("Carta 2 \n");
     printf("Insira o nome do estado: ");
     fgets(Estado2, sizeof(Estado2), stdin);
@@ -68,7 +66,7 @@ int main() {
     fgets(Cidade2, sizeof(Cidade2), stdin);
 
     printf("Insira a população desta cidade: ");
-    scanf("%d", &Populacao2);
+    scanf("%lu", &Populacao2);
 
     printf("Insira a área da cidade em KM²: ");
     scanf("%f", &Area2);
@@ -86,11 +84,13 @@ int main() {
     SuperPoder2 = Populacao2 + Area2 + PIB2 + Pontos2 + (1 / Densidade2) + Percapita2;
     getchar();
 
+    //Apresentando os dados de cada carta...
+
     printf("Dados da Carta 1 \n");
     printf("Nome do estado: %s", Estado1);
     printf("Código da carta: %s", Codigo1);
     printf("Nome da cidade: %s", Cidade1);
-    printf("População da cidade: %d\n", Populacao1);
+    printf("População da cidade: %lu\n", Populacao1);
     printf("Área em KM² da cidade: %.1f\n", Area1);
     printf("PIB da cidade: %.2f\n", PIB1);
     printf("Numero de pontos turísticos: %d\n", Pontos1);
@@ -102,7 +102,7 @@ int main() {
     printf("Nome do estado: %s", Estado2);
     printf("Código da carta: %s", Codigo2);
     printf("Nome da cidade: %s", Cidade2);
-    printf("População da cidade: %d\n", Populacao2);
+    printf("População da cidade: %lu\n", Populacao2);
     printf("Área em KM² da cidade: %.1f\n", Area2);
     printf("PIB da cidade: %.2f\n", PIB2);
     printf("Numero de pontos turísticos: %d\n", Pontos2);
@@ -111,8 +111,9 @@ int main() {
     printf("Super Poder: %f\n", SuperPoder2);
 
     //Etapa para os jogadores escolher qual atributo para comparar e decidir o vencedor da rodada
-    printf(" ## AGORA VAMOS COMPARAR AS CARTAS E VER QUEM GANHOU ##\n");
-    printf("Escolha um atributo a ser comparado com as seguintes opções:\n");
+    printf(" ## AGORA VAMOS COMPARAR AS CARTAS ESCOLHIDAS E VER QUEM GANHOU ##\n");
+    printf("Escolha dois atributos a ser comparado com as seguintes opções:\n");
+    printf("não pode repetir os atributos escolhidos.\n");
     printf("1. População\n");
     printf("2. Área\n");
     printf("3. PIB\n");
@@ -120,135 +121,167 @@ int main() {
     printf("5. Densidade populacional\n");
     printf("6. PIB Per capita\n");
     printf("7. Super poder\n");
-    printf("Digite uma das opções para comparar: ");
-    scanf("%d", &escolhaJogador);
 
-  switch (escolhaJogador)
-  {
-  case 1:
-    printf("Atributo escolhido = População\n");
-    if (Populacao1 == Populacao2){
-        printf("Houve um EMPATE!!");
-    } else if (Populacao1 > Populacao2){
-        printf("A carta vencedora é: \n");
-        printf("%s", &Estado1);
-        printf("%s", &Cidade1);
-        printf("%s", &Codigo1);
-    } else{
-        printf("A carta vencedora é: \n");
-        printf("%s\n", &Estado2);
-        printf("%s\n", &Cidade2);
-        printf("%s\n", &Codigo2);
+    // Nessa Etapa o Jogador 1 vai escolher seus atributos
+    
+    printf("jogador 1 é sua vez\n");
+    printf("Digite o primeiro atributo para comparar: ");
+    scanf("%d", &escolhaJogador1);
+
+    printf("Digite o segundo atributo para comparar: ");
+    scanf("%d", &escolhaJogador2);
+    // Verificando se o jogador 1 não escolheu os mesmo atributos
+
+    if (escolhaJogador2 == escolhaJogador1){
+        printf("Você não pode escolher o mesmo atributo duas vezes.\n");
+    return 1;
     }
-    break;
+
+    // Agora é a vez do 2 Jogador escolher seus atributos
+
+    printf("Jogador 2 é sua vez\n");
+    printf("Digite o primeiro atributo para comparar: ");
+    scanf("%d", &escolhaJogador3);
+
+    printf("Digite o segundo atributo para comparar: ");
+    scanf("%d", &escolhaJogador4);
+    // Verificando se o jogador 2 não escolheu os mesmo atributos
+    if (escolhaJogador4 == escolhaJogador3){
+        printf("Você não pode escolher o mesmo atributo duas vezes.\n");
+    return 1;
+    }
+    
    
-    case 2:
-    printf("Atributo escolhido = Área\n");
-    if (Area1 == Area2){
-        printf("Houve um EMPATE!!");
-    } else if (Area1 > Area2){
-        printf("A carta vencedora é: \n");
-        printf("%s", &Estado1);
-        printf("%s", &Cidade1);
-        printf("%s", &Codigo1);
-    } else{
-        printf("A carta vencedora é: \n");
-        printf("%s\n", &Estado2);
-        printf("%s\n", &Cidade2);
-        printf("%s\n", &Codigo2);
+    // Atribuindo as escolhas dos jogadores  e acrescentando a soma do jogador
+    switch (escolhaJogador1) {
+      case 1: somaJogador1 += Populacao1; 
+      printf("Atributo escolhido (Jogador 1) = População\n");
+      break;
+      case 2: somaJogador1 += Area1;
+      printf("Atributo escolhido (Jogador 1) = Área\n"); 
+      break;;
+      case 3: somaJogador1 += PIB1;
+      printf("Atributo escolhido (Jogador 1) = PIB\n"); 
+      break;
+      case 4: somaJogador1 += Pontos1;
+      printf("Atributo escolhido (Jogador 1) = Pontos Turísticos\n");
+      break;
+      case 5: somaJogador1 += Densidade1;
+      printf("Atributo escolhido (Jogador 1) = Densidade Populacional\n"); 
+      break;
+      case 6: somaJogador1 += Percapita1;
+      printf("Atributo escolhido (Jogador 1) = PIB Per Capita\n"); 
+      break;
+      case 7: somaJogador1 += SuperPoder1;
+      printf("Atributo escolhido (Jogador 1) = Super Poder\n"); 
+      break;
+      default:
+      printf("Escolha inválida.\n");
+      return 1;
+      }
+
+    switch (escolhaJogador2) {
+        case 1: somaJogador1 += Populacao1;
+        printf("Atributo escolhido (Jogador 1) = População\n");
+        break;
+        case 2: somaJogador1 += Area1;
+        printf("Atributo escolhido (Jogador 1) = Área\n");
+        break;;
+        case 3: somaJogador1 += PIB1;
+        printf("Atributo escolhido (Jogador 1) = PIB\n");
+        break;
+        case 4: somaJogador1 += Pontos1;
+        printf("Atributo escolhido (Jogador 1) = Pontos Turísticos\n");
+        break;
+        case 5: somaJogador1 += Densidade1;
+        printf("Atributo escolhido (Jogador 1) = Densidade Populacional\n");
+        break;
+        case 6: somaJogador1 += Percapita1;
+        printf("Atributo escolhido (Jogador 1) = PIB Per Capita\n");
+        break;
+        case 7: somaJogador1 += SuperPoder1;
+        printf("Atributo escolhido (Jogador 1) = Super Poder\n");
+        break;
+        default:
+        printf("Escolha inválida.\n");
+        return 1;
     }
+
+    // Comparando os atributos do jogador 2
+
+    switch (escolhaJogador3) {
+      case 1: somaJogador2 += Populacao2;
+      printf("Atributo escolhido (Jogador 2) = População\n");
+      break;
+      case 2: somaJogador2 += Area2;
+      printf("Atributo escolhido (Jogador 2) = Árear\n");
+      break;;
+      case 3: somaJogador2 += PIB2;
+      printf("Atributo escolhido (Jogador 2) = PIB\n");
+      break;
+      case 4: somaJogador2 += Pontos2;
+      printf("Atributo escolhido (Jogador 2) = Pontos Turísticos\n");
+      break;
+      case 5: somaJogador2 += Densidade2;
+      printf("Atributo escolhido (Jogador 2) = Densidade Populacional\n");
+      break;
+      case 6: somaJogador2 += Percapita2;
+      printf("Atributo escolhido (Jogador 2) = PIB Per Capita\n");
+      break;
+      case 7: somaJogador2 += SuperPoder2;
+      printf("Atributo escolhido (Jogador 2) = Super Poder\n");
+      break;
+      default:
+      printf("Escolha inválida.\n");
+      return 1;
+  }
+
+  switch (escolhaJogador4) {
+    case 1: somaJogador2 += Populacao2;
+    printf("Atributo escolhido (Jogador 2) = População\n");
     break;
-    
-    case 3:
-    printf("Atributo escolhido = PIB\n");
-    if (PIB1 == PIB2){
-        printf("Houve um EMPATE!!");
-    } else if (PIB1 > PIB2){
-        printf("A carta vencedora é: \n");
-        printf("%s", &Estado1);
-        printf("%s", &Cidade1);
-        printf("%s", &Codigo1);
-    } else{
-        printf("A carta vencedora é: \n");
-        printf("%s\n", &Estado2);
-        printf("%s\n", &Cidade2);
-        printf("%s\n", &Codigo2);
-    }
+    case 2: somaJogador2 += Area2;
+    printf("Atributo escolhido (Jogador 2) = Área\n");
+    break;;
+    case 3: somaJogador2 += PIB2;
+    printf("Atributo escolhido (Jogador 2) = PIB\n");
     break;
-    
-    case 4:
-    printf("Atributo escolhido = Número de pontos Turísticos\n");
-    if (Pontos1 == Pontos2){
-        printf("Houve um EMPATE!!");
-    } else if (Pontos1 > Pontos2){
-        printf("A carta vencedora é: \n");
-        printf("%s", &Estado1);
-        printf("%s", &Cidade1);
-        printf("%s", &Codigo1);
-    } else{
-        printf("A carta vencedora é: \n");
-        printf("%s\n", &Estado2);
-        printf("%s\n", &Cidade2);
-        printf("%s\n", &Codigo2);
-    }
+    case 4: somaJogador2 += Pontos2;
+    printf("Atributo escolhido (Jogador 2) = Pontos Turísticos\n");
     break;
-    
-    case 5:
-    printf("Atributo escolhido = Densidade Papulacional\n");
-    if (Densidade1 == Densidade2){
-        printf("Houve um EMPATE!!");
-    } else if (Densidade1 < Densidade2){
-        printf("A carta vencedora é: \n");
-        printf("%s", &Estado1);
-        printf("%s", &Cidade1);
-        printf("%s", &Codigo1);
-    } else{
-        printf("A carta vencedora é: \n");
-        printf("%s\n", &Estado2);
-        printf("%s\n", &Cidade2);
-        printf("%s\n", &Codigo2);
-    }
+    case 5: somaJogador2 += Densidade2;
+    printf("Atributo escolhido (Jogador 2) = Densidade Populacional\n");
     break;
-    
-    case 6:
-    printf("Atributo escolhido = PIB Per capita\n");
-    if (Percapita1 == Percapita2){
-        printf("Houve um EMPATE!!");
-    } else if (Percapita1 > Percapita2){
-        printf("A carta vencedora é: \n");
-        printf("%s", &Estado1);
-        printf("%s", &Cidade1);
-        printf("%s", &Codigo1);
-    } else{
-        printf("A carta vencedora é: \n");
-        printf("%s\n", &Estado2);
-        printf("%s\n", &Cidade2);
-        printf("%s\n", &Codigo2);
-    }
+    case 6: somaJogador2 += Percapita2; 
+    printf("Atributo escolhido (Jogador 2) = PIB Per Capita\n");
     break;
-    
-    case 7:
-    printf("Atributo escolhido = Super poder\n");
-    if (SuperPoder1 == SuperPoder2){
-        printf("Houve um EMPATE!!");
-    } else if (SuperPoder1 > SuperPoder2){
-        printf("A carta vencedora é: \n");
-        printf("%s", &Estado1);
-        printf("%s", &Cidade1);
-        printf("%s", &Codigo1);
-    } else{
-        printf("A carta vencedora é: \n");
-        printf("%s\n", &Estado2);
-        printf("%s\n", &Cidade2);
-        printf("%s\n", &Codigo2);
-    }
+    case 7: somaJogador2 += SuperPoder2;
+    printf("Atributo escolhido (Jogador 2) = Super Poder\n");
     break;
+    default:
+    printf("Escolha inválida.\n");
+    return 1;
+}
+
+// Resultado Final
+
+if(somaJogador1 > somaJogador2) {
+  printf("O jogador 1 venceu com a carta  do Estado de %s, cidade de %s", Estado1, Cidade1);
+  printf("Atributos escolhidos foram %d e %d, a soma dos dois foi %.2f.\n", escolhaJogador1, escolhaJogador2, somaJogador1);
+  printf("O jogador 2 perdeu com a carta do Estado %s, cidade de %s", Estado2, Cidade2);
+  printf("Atributos escolhidos foram %d e %d, a soma dos dois foi %.2f.\n", escolhaJogador3, escolhaJogador4, somaJogador2);
+} else if(somaJogador1 < somaJogador2){
+  printf("O jogador 2 venceu com a carta  do Estado de %s, cidade de %s", Estado2, Cidade2);
+  printf("Atributos escolhidos foram %d e %d, a soma dos dois foi %.2f.\n", escolhaJogador3, escolhaJogador4, somaJogador2);
+  printf("O jogador 1 perdeu com a carta do Estado %s, cidade de %s", Estado1, Cidade1);
+  printf("Atributos escolhidos foram %d e %d, a soma dos dois foi %.2f.\n", escolhaJogador1, escolhaJogador2, somaJogador1);
+} else {
+  printf("Houve um empate!\n");
+  printf("Segue abaixo os resultados das escolhas dos jogadores:\n");
+  printf("Resultado jogador 1 foi %.2f.\n", somaJogador1);
+  printf("Resultado jogador 2 foi %.2f.\n", somaJogador2);
+}
+
   
-  default:
-  printf("Opção inválida!");
-
-  break;
-    }
-   
     return 0;
   }
